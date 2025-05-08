@@ -41,7 +41,7 @@ class CustomModal extends Component {
 
     return (
       <Modal isOpen={true} toggle={toggle}>
-      <ModalHeader toggle={toggle}>ToDo Item</ModalHeader>
+      <ModalHeader toggle={toggle} aria-label="ToDo Item Header">ToDo Item</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
