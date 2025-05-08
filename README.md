@@ -7,7 +7,7 @@ A web application for to-do list. Functionality includes:
 
 Goals: functional, cute, easy to use
 
-# How to Run Locally
+## How to Run Locally
 1. Clone repository.
 2. Open repository in chosen IDE (I used VSCode).
 3. In terminal, create a virtual environment and activate it.
