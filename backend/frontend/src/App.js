@@ -2,7 +2,13 @@ import './App.css';
 import React, { Component } from 'react';
 import Modal from "./components/Modal";
 import axios from "axios";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import stickyNote1 from './static/images/stickyNoteYellow-removebg-preview.png';
+import stickyNote2 from './static/images/stickyNoteYellow-removebg-preview.png';
+import redCircle from './static/images/redCircle-removebg-preview.png';
+import boomshakalakaAudio from './static/audio/boomshakalaka.mp3';
+
 
 class App extends Component {
   constructor(props) {
@@ -55,10 +61,10 @@ class App extends Component {
   };
 
   createItem = () => {
-    const audio = new Audio();
     const item = { title: "", description: "", completed: false };
-
-    this.setState({ activeItem: item, modal: !this.state.modal });
+    const audio = new Audio(boomshakalakaAudio);
+    audio.play();
+    // this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
   editItem = (item) => {
@@ -72,24 +78,28 @@ class App extends Component {
     return this.setState({ viewCompleted: false});
   }
 
-  renderCompleteList = () => {
+  renderLists = () => {
     return (
-      <div className="complete-list">
-        <span 
-          className="complete-span">
-          Complete
-        </span>
-      </div>
-    );
-  };
+      <div className="lists-row">
+        <div className="lists-col">
+          <img src={stickyNote1} alt="sticky note" className="sticky-note1"/>
+          <audio src={boomshakalakaAudio} className="add-task-audio"/>
+          <span className="incomplete-list"
+            onClick={() => this.displayCompleted(false)}
+          >
+            current tasks
+          </span>
+        </div>
 
-  renderIncompleteList = () => {
-    return (
-      <div className="incomplete-list">
-        <span
-          className="incomplete-span">
-            Incomplete
-        </span>
+
+        <div className="lists-col">
+        <img src={stickyNote2} alt="sticky note" className="sticky-note2"/>
+          <span className="completed-list"
+            onClick={() => this.displayCompleted(true)}
+          >
+            past tasks
+          </span>
+        </div>
       </div>
     );
   };
@@ -114,18 +124,15 @@ class App extends Component {
   };
 
   render () {
-    return (
+    return (      
       <main className="mainPage">
         <h1 class="mainHeading">to-do list</h1>
         <div class="button-div">
-          <button class="add-task-btn" onClick={this.createItem}>Add Task</button>
+          <img src={redCircle} alt="red circle" className="red-circle"/>
+          <button class="add-task-btn" onClick={this.createItem}>add tasks</button>
         </div>
 
-        <div class="view-row">
-          {this.renderCompleteList()}
-          {this.renderIncompleteList()}
-        </div>
-        
+        {this.renderLists()}
 
         <ul class="todoList">{this.renderItems()}</ul>
         {this.state.modal ? (
