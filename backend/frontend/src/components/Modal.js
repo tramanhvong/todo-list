@@ -8,16 +8,16 @@ import {
   Form,
   FormGroup,
   Input,
-  Label,
+  Label
 } from "reactstrap";
 
-export default class CustomModal extends Component {
+class CustomModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeItem: props.activeItem || {
-        title: "",
-        description: "",
+        title: "Default Title",
+        description: "Default Description",
         completed: false,
       },
     };
@@ -41,7 +41,7 @@ export default class CustomModal extends Component {
 
     return (
       <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}>ToDo Item</ModalHeader>
+      <ModalHeader toggle={toggle}>ToDo Item</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
@@ -91,3 +91,5 @@ export default class CustomModal extends Component {
     );
   }
 }
+
+export default CustomModal;

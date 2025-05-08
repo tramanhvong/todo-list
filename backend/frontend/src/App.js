@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
 import Modal from "./components/Modal";
@@ -56,6 +55,7 @@ class App extends Component {
   };
 
   createItem = () => {
+    const audio = new Audio();
     const item = { title: "", description: "", completed: false };
 
     this.setState({ activeItem: item, modal: !this.state.modal });
@@ -72,19 +72,22 @@ class App extends Component {
     return this.setState({ viewCompleted: false});
   }
 
-  renderTabList = () => {
+  renderCompleteList = () => {
     return (
-      <div className="nav nav-tabs">
+      <div className="complete-list">
         <span 
-          className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
-          onClick={() => this.displayCompleted(true)}
-        >
+          className="complete-span">
           Complete
         </span>
+      </div>
+    );
+  };
 
+  renderIncompleteList = () => {
+    return (
+      <div className="incomplete-list">
         <span
-          className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
-          onClick={() => this.displayCompleted(false)}>
+          className="incomplete-span">
             Incomplete
         </span>
       </div>
@@ -94,7 +97,7 @@ class App extends Component {
   renderItems = () => { 
     const { viewCompleted } = this.state;
     const newItems = this.state.todoList.filter(
-      (item) => item.complted == viewCompleted
+      (item) => item.completed === viewCompleted
     );
 
     return newItems.map((item) => (
@@ -112,51 +115,29 @@ class App extends Component {
 
   render () {
     return (
-      <main className="container">
-        <h1 class="mainHeading">ToDo App</h1>
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="card">
-              <div class="button-div1">
-                <button class="addTaskButton" onClick={this.createItem}>Add Task</button>
-              </div>
-
-              {this.renderTabList()}
-
-              <ul class="todoList">{this.renderItems()}</ul>
-            </div>
-          </div>
+      <main className="mainPage">
+        <h1 class="mainHeading">to-do list</h1>
+        <div class="button-div">
+          <button class="add-task-btn" onClick={this.createItem}>Add Task</button>
         </div>
+
+        <div class="view-row">
+          {this.renderCompleteList()}
+          {this.renderIncompleteList()}
+        </div>
+        
+
+        <ul class="todoList">{this.renderItems()}</ul>
         {this.state.modal ? (
           <Modal
-          activeitem={this.state.activeItem}
+          activeItem={this.state.activeItem}
           toggle={this.toggle}
-          onSave={this.handlSubmit}
+          onSave={this.handleSubmit}
           />
         ): null}
       </main>
     );
   }
 }
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
