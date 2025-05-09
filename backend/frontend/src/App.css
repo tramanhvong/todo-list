@@ -115,10 +115,35 @@
 
 .red-circle {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 150%;
+  height: auto;
   border-radius: 50%;
   opacity: 1;
+  top: -22%;
+  left: -10%;
+  z-index:0.5;
+}
+
+.input-txt {
+  background-color:#E7D44B00;
+  border-color:#E7D44B00;
+
+  width: calc(450px * 90/100);
+  height: calc(513px * 60/100);
+  resize: none;
+
+  z-index: 1;
+  position: absolute;
+  top: 30%;
+  left: 7%;
+
+  font-size: 30px;
+}
+
+.input-txt:focus {
+  outline: none;
+  border-color: #4285f400;
+  box-shadow: 0 0 5px #FF8C42;
 }
 
 .completed-list, .incomplete-list {
@@ -137,12 +162,6 @@
   left: 26%; /*10 for left, 30 for center, more for right*/
 }
 
-.input-txt {
-  z-index: 1;
-  position: absolute;
-  top: 20%;
-  left: 7%;
-}
 .completed-list {
   left: 40%; /*10 for left, 30 for center, more for right*/
 }

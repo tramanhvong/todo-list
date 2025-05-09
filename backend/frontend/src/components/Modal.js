@@ -45,25 +45,14 @@ class CustomModal extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="todo-title">Title</Label>
-              <Input
-                type="text"
-                id="todo-title"
-                name="title"
-                value={this.state.activeItem.title}
-                onChange={this.handleChange}
-                placeholder="Enter ToDo Title"
-              />
-            </FormGroup>
-            <FormGroup>
               <Label for="todo-description">Description</Label>
               <Input
                 type="text"
-                id="todo-description"
-                name="description"
+                id="todo-task"
+                name="task"
                 value={this.state.activeItem.description}
                 onChange={this.handleChange}
-                placeholder="Enter ToDo description"
+                placeholder="Enter ToDo task"
               />
             </FormGroup>
             <FormGroup check>

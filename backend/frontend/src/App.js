@@ -60,11 +60,12 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
 
-  createItem = () => {
-    const item = { title: "", description: "", completed: false };
-    const audio = new Audio(boomshakalakaAudio);
-    audio.play();
-    this.setState({ activeItem: item, modal: !this.state.modal });
+  createItem = (text) => {
+    const item_list = text.split('\n');
+    const newItem = item_list[item_list.length - 1];
+    // const audio = new Audio(boomshakalakaAudio);
+    // audio.play();
+    this.setState({ activeItem: newItem, modal: !this.state.modal });
   };
 
   editItem = (item) => {
@@ -78,35 +79,35 @@ class App extends Component {
     return this.setState({ viewCompleted: false});
   }
 
-  renderLists = () => {
-    return (
-      <div className="lists-row">
-        <div className="lists-col">
-          <img src={redCircle} alt="red circle" className="red-circle"/>
-          <img src={stickyNote1} alt="sticky note" className="sticky-note1"/>
+  // renderLists = () => {
+  //   return (
+  //     <div className="lists-row">
+  //       <div className="lists-col">
+  //         <img src={redCircle} alt="red circle" className="red-circle"/>
+  //         <img src={stickyNote1} alt="sticky note" className="sticky-note1"/>
 
-          {/* <span className="incomplete-list" onClick={() => this.displayCompleted(false)}>
-            current tasks
-          </span> */}
+  //         {/* <span className="incomplete-list" onClick={() => this.displayCompleted(false)}>
+  //           current tasks
+  //         </span> */}
           
-          <span className="incomplete-list">current tasks</span>
-          <div className="incomplete-list-txt" contentEditable="true">
-            <p>add new tasks</p>
-          </div>
+  //         <span className="incomplete-list">current tasks</span>
+  //         <div className="incomplete-list-txt" contentEditable="true">
+  //           <p>add new tasks</p>
+  //         </div>
           
           
-        </div>
+  //       </div>
 
 
-        <div className="lists-col">
-        <img src={stickyNote2} alt="sticky note" className="sticky-note2"/>
-          <span className="completed-list" onClick={() => this.displayCompleted(true)}>
-            past tasks
-          </span>
-        </div>
-      </div>
-    );
-  };
+  //       <div className="lists-col">
+  //       <img src={stickyNote2} alt="sticky note" className="sticky-note2"/>
+  //         <span className="completed-list" onClick={() => this.displayCompleted(true)}>
+  //           past tasks
+  //         </span>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   renderItems = () => { 
     const { viewCompleted } = this.state;
@@ -146,7 +147,7 @@ class App extends Component {
               current tasks
             </span> */}
             <div className="incomplete-list-txt">
-              <input className="input-txt" type="text" placeholder="click to add new task"></input>
+              <textarea className="input-txt" type="text" placeholder="click to add new task" onChange={this.createItem}></textarea>
             </div>
           </div>
 
