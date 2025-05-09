@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
-import Modal from "./components/Modal";
+import CustomModal from "./components/Modal";
 import axios from "axios";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,7 +43,7 @@ class App extends Component {
   handleSubmit = (item) => {
     this.toggle();
 
-    if (item.ide) {
+    if (item.id) {
       axios
         .put(`/api/todos/${item.id}/`, item)
         .then((res) => this.refreshList());
@@ -60,12 +60,14 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
 
-  createItem = (text) => {
-    const item_list = text.split('\n');
+  createItem = (e) => {
+    const tasks = e.target.value;
+    const item_list = tasks.split('\n');
     const newItem = item_list[item_list.length - 1];
     // const audio = new Audio(boomshakalakaAudio);
     // audio.play();
-    this.setState({ activeItem: newItem, modal: !this.state.modal });
+    this.setState({ activeItem: {task: newItem, completed: false}});
+    this.handleSubmit(this.state.activeItem);
   };
 
   editItem = (item) => {
@@ -161,7 +163,7 @@ class App extends Component {
 
         <ul class="todoList">{this.renderItems()}</ul>
         {this.state.modal ? (
-          <Modal
+          <CustomModal
           activeItem={this.state.activeItem}
           toggle={this.toggle}
           onSave={this.handleSubmit}
