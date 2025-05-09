@@ -145,8 +145,8 @@ class App extends Component {
             {/* <span className="incomplete-list" onClick={() => this.displayCompleted(false)}>
               current tasks
             </span> */}
-            <div className="incomplete-list-txt" contentEditable="true">
-              <p className="input-txt">add new tasks</p>
+            <div className="incomplete-list-txt">
+              <input className="input-txt" type="text" placeholder="click to add new task"></input>
             </div>
           </div>
 
