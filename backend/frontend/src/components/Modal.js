@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   Modal,
@@ -16,8 +17,7 @@ class CustomModal extends Component {
     super(props);
     this.state = {
       activeItem: props.activeItem || {
-        title: "Default Title",
-        description: "Default Description",
+        task: "Placeholder Task",
         completed: false,
       },
     };
@@ -26,7 +26,6 @@ class CustomModal extends Component {
 
   handleChange = (e) => {
     let { name, value } = e.target;
-
     if (e.target.type === "checkbox") {
       value = e.target.checked;
     }
@@ -40,7 +39,7 @@ class CustomModal extends Component {
     const { toggle, onSave } = this.props;
 
     return (
-      <Modal isOpen={true} toggle={toggle}>
+      <Modal isOpen={this.props.modal} toggle={toggle}>
       <ModalHeader toggle={toggle} aria-label="ToDo Item Header">ToDo Item</ModalHeader>
         <ModalBody>
           <Form>
@@ -80,5 +79,15 @@ class CustomModal extends Component {
     );
   }
 }
+
+CustomModal.propTypes = {
+toggle: PropTypes.func.isRequired,
+onSave: PropTypes.func.isRequired,
+activeItem: PropTypes.shape({
+  title: PropTypes.string,
+  description: PropTypes.string,
+  completed: PropTypes.bool,
+}),
+};
 
 export default CustomModal;

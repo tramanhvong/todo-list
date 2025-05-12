@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import CustomModal from "./components/Modal";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ import stickyNote1 from './static/images/stickyNoteYellow-removebg-preview.png';
 import stickyNote2 from './static/images/stickyNoteYellow-removebg-preview.png';
 import redCircle from './static/images/redCircle-removebg-preview.png';
 import boomshakalakaAudio from './static/audio/boomshakalaka.mp3';
+import CheckList from './CheckList';
 
 
 class App extends Component {
@@ -62,12 +63,12 @@ class App extends Component {
 
   createItem = (e) => {
     const tasks = e.target.value;
-    const item_list = tasks.split('\n');
-    const newItem = item_list[item_list.length - 1];
+    // const item_list = tasks.split('\n');
+    // const newItem = item_list[item_list.length - 1];
     // const audio = new Audio(boomshakalakaAudio);
     // audio.play();
-    this.setState({ activeItem: {task: newItem, completed: false}});
-    this.handleSubmit(this.state.activeItem);
+    this.setState({ activeItem: {task: tasks, completed: false}});
+    // this.handleSubmit(this.state.activeItem);
   };
 
   editItem = (item) => {
@@ -128,8 +129,8 @@ class App extends Component {
         </span>
       </li>
     ));
-  };
-
+  }
+ 
   render () {
     return (      
       <main className="mainPage">
@@ -137,17 +138,16 @@ class App extends Component {
         {/* <div class="button-div">
           <img src={redCircle} alt="red circle" className="red-circle"/>
           <button class="add-task-btn" onClick={this.createItem}>add tasks</button>
-        </div> */}
-
-        {/* lists */}
+          <button class="add-task-btn" onClick={this.createTask}>add tasks</button>
+        </div>
         <div className="lists-row">
           <div className="lists-col">
             <img src={redCircle} alt="red circle" className="red-circle"/>
             <span className="incomplete-list">current tasks</span>
             <img src={stickyNote1} alt="sticky note" className="sticky-note1"/>
-            {/* <span className="incomplete-list" onClick={() => this.displayCompleted(false)}>
+            <span className="incomplete-list" onClick={() => this.displayCompleted(false)}>
               current tasks
-            </span> */}
+            </span>
             <div className="incomplete-list-txt">
               <textarea className="input-txt" type="text" placeholder="click to add new task" onChange={this.createItem}></textarea>
             </div>
@@ -159,8 +159,9 @@ class App extends Component {
               past tasks
             </span>
           </div>
-        </div>
-
+        </div> */}
+        <CheckList/>
+        
         <ul class="todoList">{this.renderItems()}</ul>
         {this.state.modal ? (
           <CustomModal
