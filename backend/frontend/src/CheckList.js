@@ -8,35 +8,64 @@ const CheckList = () => {
   const [items, setItems] = useState([]); // <--- This defines `items`
 
   const addItem = () => {
-    setItems([...items, { id: Date.now() }]);
+    if (items.length >= 7) {
+      alert("You can only add up to 6 tasks.");
+      return;
+    }
+    setItems([...items, { id: Date.now(), text: '', checked: false }]);
   };
+
+  const changeItem = (id, text) => {
+    setItems(items.map(item => (item.id === id ? { ...item, text } : item)));
+  }
+
+  const checkItem = (id) => {
+    setItems(items.map(item => (item.id === id ? { ...item, checked: !item.checked } : item)));
+  }
 
   return (
     <div className="current-tasks">
-      <div class="button-div">
+
+      <div className="button-div">
         <img src={redCircle} alt="red circle" className="red-circle"/>
-        {/* <button class="add-task-btn" onClick={this.createItem}>add tasks</button> */}
-        <button class="add-task-btn" onClick={addItem}>add tasks</button>
+        <button className="add-task-btn" onClick={addItem}>add tasks</button>
       </div>
+
       <div className="lists-row">
         <div className="lists-col">
-          {/* <img src={redCircle} alt="red circle" className="red-circle"/> */}
           <span className="incomplete-list">current tasks</span>
           <img src={stickyNote1} alt="sticky note" className="sticky-note1"/>
-          <span className="incomplete-list" onClick={() => this.displayCompleted(false)}>
+          <span className="incomplete-list">
             current tasks
           </span>
 
-          {items.map(item => (
-            <div key={item.id} className="task-item">
-              <input type="checkbox" className="checkbox" />
-              <textarea
-                placeholder="Enter text..."
-                className="incomplete-list"
-                rows={3}
-              />
-            </div>
-          ))}
+          <div className="task-cols">
+            {items.map(item => (
+              <div key={item.id} className="task-item">
+                <input 
+                type="checkbox" 
+                className="checkbox" 
+                checked={item.checked} 
+                onChange={() => checkItem(item.id)}
+                />
+                <textarea
+                  placeholder="Enter text..."
+                  className="list-item"
+                  rows={1}
+                  value={item.text}
+                  onChange={e => changeItem(item.id, e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+          
+        </div>
+
+        <div className="lists-col">
+          <img src={stickyNote2} alt="sticky note" className="sticky-note2"/>
+          <span className="completed-list">
+            past tasks
+          </span>
         </div>
       </div>
     </div>

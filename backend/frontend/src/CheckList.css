@@ -102,3 +102,48 @@
 .incomplete-list {
   left: 26%; /*10 for left, 30 for center, more for right*/
 }
+
+.completed-list {
+  left: 40%; /*10 for left, 30 for center, more for right*/
+}
+
+.task-cols {
+  position: absolute;
+  top: 18%;
+  width: 100%;
+  padding: 20px 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+}
+
+.task-item {
+  background: none;
+  border: none;
+
+  width: fit-content;
+  height: fit-content;
+  resize: none;
+
+  top: 30%;
+  left: 7%;
+
+  font-size: 30px;
+  gap: 10px;
+  display: flex;
+}
+
+.checkbox {
+  width: 30px;
+  height: 30px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  width: calc(450px * 82/100);
+  height: 30px;
+  resize: none;
+}
